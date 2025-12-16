@@ -3,6 +3,7 @@ import type { Request, Response } from "express";
 import { sendWhatsAppMessage } from "./services/whatsapp.js";
 import { getIpos } from "./services/ipos.js";
 import { sendTelegramMessage } from "./services/telegram.js";
+import "./cron/ipoCron.js";
 
 const app = express();
 
