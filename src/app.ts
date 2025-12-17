@@ -12,10 +12,15 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.get("/ipo-updates", async (req: Request, res: Response) => {
-  const message = await getIpos();
-  await sendWhatsAppMessage(message);
-  await sendTelegramMessage(message);
-  res.json({ success: true });
+  try {
+    const message = await getIpos();
+    await sendWhatsAppMessage(message);
+    await sendTelegramMessage(message);
+    res.json({ success: true });
+  } catch (err) {
+    console.error("Failed to send message: " + err);
+    res.json({ message: "Failed to send message" });
+  }
 });
 
 const PORT = Number(process.env.PORT) || 3001;
